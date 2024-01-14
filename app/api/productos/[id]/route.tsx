@@ -8,11 +8,11 @@ interface Props{
 
 export async function GET(request: NextRequest, {params}: {params: {id:string}}){
 
-const usuario = await prisma.usuario.findUnique({where: {id: parseInt(params.id)}})
+const producto = await prisma.producto.findUnique({where: {id: parseInt(params.id)}})
 
-if(!usuario)
-  return NextResponse.json({error: 'Usuario No encontrado'}, {status: 404});
-return NextResponse.json(usuario);
+if(!producto)
+  return NextResponse.json({error: 'Producto No encontrado'}, {status: 404});
+return NextResponse.json(producto);
 
 
 //  si el id es mayor a 100 entonces error
@@ -24,19 +24,19 @@ return NextResponse.json(usuario);
 
 export async function PUT (request: NextRequest, {params}: {params: {id:string}}){
   const body =  await request.json();
-  const usuario =  await prisma.usuario.findUnique({where: {id: parseInt(params.id)}})
+  const producto =  await prisma.producto.findUnique({where: {id: parseInt(params.id)}})
   
-  if (!usuario)
-     return NextResponse.json({error: 'el usuario no encontrado'}, {status: 400})
+  if (!producto)
+     return NextResponse.json({error: 'el producto no encontrado'}, {status: 400})
   
-     const actualizarUsuario = await prisma.usuario.update({
-        where: {id: usuario.id},
+     const actualizarProducto = await prisma.producto.update({
+        where: {id: producto.id},
         data:{
          nombre : body.nombre,
-         email : body.email 
+         precio : body.precio 
          }
       })
-      return NextResponse.json(actualizarUsuario, {status:200});
+      return NextResponse.json({message:'Producto actualizado'}, {status:200});
   
   // if (!body.nombre) 
   //     return NextResponse.json({error: 'el nombre de usuario es obligatorio'}, {status: 400})    
@@ -45,17 +45,16 @@ export async function PUT (request: NextRequest, {params}: {params: {id:string}}
   //return NextResponse.json({id:1, name: body.name});
 }
 
-
 export async function DELETE (request: NextRequest,{params}: {params: {id: string}})
 {
 
-  const usuario =  await prisma.usuario.findUnique({where: {id: parseInt(params.id)}})
-  if (!usuario)   
-     return NextResponse.json({error: 'Usuario No encontrado'}, {status: 404});
+  const producto =  await prisma.producto.findUnique({where: {id: parseInt(params.id)}})
+  if (!producto)   
+     return NextResponse.json({error: 'Producto No encontrado'}, {status: 404});
   
   //Funcionalidad de Borrar
-  await prisma.usuario.delete({where:{id:usuario.id}}) 
-  return NextResponse.json({message: 'Usuario Borrado'}, {status: 200});
+  await prisma.producto.delete({where:{id:producto.id}}) 
+  return NextResponse.json({message: 'Producto Borrado'}, {status: 200});
  
  
   // if (params.id > 10) 

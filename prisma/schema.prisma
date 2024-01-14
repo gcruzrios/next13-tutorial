@@ -18,12 +18,18 @@ datasource db {
 //Creación Modelo usuario
 
 model Usuario {
-  id         Int     @id @default(autoincrement())
-  nombre     String
-  email      String  @unique
-  seguidores Int     @default(0)
-  estaActivo Boolean @default(true)
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  email         String   @unique
+  seguidores    Int      @default(0)
+  estaActivo    Boolean  @default(true)
   fechaRegistro DateTime @default(now())
 }
 
-  
+// creación modelo Producto
+
+model Producto {
+  id     Int    @id @default(autoincrement())
+  nombre String
+  precio Float
+}
