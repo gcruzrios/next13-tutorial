@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 
-import TablaUsuarios from './tablaUsuarios'
+import TablaUsuarios from './TablaUsuarios'
 import Link from 'next/link'
 
 

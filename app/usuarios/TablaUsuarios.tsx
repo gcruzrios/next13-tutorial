@@ -10,6 +10,7 @@ interface Usuario {
 const TablaUsuarios = async () => {
 
   const res = await fetch('http://minimal.test/api/usuarios',{cache:'no-store'});
+  
   const usuarios: Usuario[] = await res.json();
   return (
     <div>
